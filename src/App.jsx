@@ -40,6 +40,7 @@ function App() {
   },[a,b,operation])
   return (
     <div className="App">
+      <h1>CALCULATOR</h1>
       <Input setvalue={setA} val={a} />
       <Input  setvalue={setB} val={b} />
      <button onClick={sum}>ADD</button>
