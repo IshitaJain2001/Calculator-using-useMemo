@@ -10,18 +10,16 @@ export default function Input() {
   const[err,setErr] = useState(false)
   const[err1,setErr1] = useState(false)
  
-let {a}= useSelector(state=>state)
-console.log(a)
-let {b}= useSelector(state=>state)
-console.log(b)
+const dispatch= useDispatch()
   function settingA(e){
 let val = e.target.value
 if(isNaN(val) ){
 setErr(true)
 }
 else{
-a= val
   setvalA(val)
+
+ 
   setErr(false)
 }
   }
@@ -33,17 +31,24 @@ a= val
     setErr1(true)
     }
     else{
-      b=val
       setvalB(val)
+     
+   
       setErr1(false)
     }
       }
-  console.log(valA,valB)
+
   return (
     <div className='flex flex-col'>
       <div>
       <button className='ml-[500px] text-3xl mt-[8px]'>value of A :</button>
       <input type="text" className='rounded-[8px] h-[50px] w-[200px] border-[3px] border-gray-500 ml-[60px] mt-[50px] ' onChange={settingA}/>
+      <button onClick={()=>{
+        dispatch({
+          type:'set_a',
+          payload:valA
+        })
+      }} className='text-2xl ml-[20px] border border-black p-[10px] bg-gray-100'>Set A</button>
       {
         err&&<p className='ml-[720px] text-red-500'>Enter a valid number</p>
       }
@@ -51,6 +56,12 @@ a= val
     <div>
     <button className='ml-[500px] text-3xl mt-[8px]'>value of B :</button>
     <input type="text" className='rounded-[8px] h-[50px] w-[200px] border-[3px] border-gray-500 ml-[60px] mt-[50px]' onChange={settingB}/>
+    <button onClick={()=>{
+       dispatch({
+        type:'set_b',
+        payload:valB
+      })
+    }} className='text-2xl ml-[20px] border border-black p-[10px] bg-gray-100' >Set B</button>
     {
         err1&&<p className='ml-[720px] text-red-500'>Enter a valid number</p>
       }
